@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+                <docker.registry.host>${env.docker_registry_host}</docker.registry.host>
 	</properties>
 
 	<dependencies>
@@ -48,6 +49,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+ <plugin>
+	<groupId>com.spotify</groupId>
+	<artifactId>dockerfile-maven-plugin</artifactId>
+	<version>1.4.0</version>
+	<configuration>
+		<!-- replace `callicoder` with your docker id-->
+		<repository>ezzzy-backend</repository>
+		
+		<buildArgs>
+			<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+		</buildArgs>
+	</configuration>
+	<executions>
+		<execution>
+			<id>default</id>
+			<phase>install</phase>
+			<goals>
+				<goal>build</goal>
+				
+			</goals>
+		</execution>
+	</executions>
+</plugin>
 		</plugins>
 	</build>
 
