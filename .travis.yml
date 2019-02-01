@@ -2,3 +2,11 @@ language: java
 jdk: oraclejdk8
 install: true
 script: mvn clean install -DskipTests=true
+services:docker
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=latest
+  - export IMAGE_NAME=ezzzy-backend
+  - docker build -t $IMAGE_NAME:$COMMIT .
+  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+  - docker push $IMAGE_NAME
