@@ -14,7 +14,7 @@ VOLUME /tmp
 ARG JAR_FILE=/home/travis/.m2/repository/com/ezzzy/restservice/ezzzy/0.0.1-SNAPSHOT/ezzzy-0.0.1-SNAPSHOT.jar
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} ezzzy-backend.jar
+ADD ./${JAR_FILE} ezzzy-backend.jar
 
 # Run the jar file 
 CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/ezzzy-backend.jar"]
