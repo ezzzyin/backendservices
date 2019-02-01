@@ -5,9 +5,14 @@ script: mvn clean install -DskipTests=true
 services:
 - docker
 after_success:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=latest
-  - export IMAGE_NAME=shwetabh3955/ezzzy_backendservices
-  - docker build -t $IMAGE_NAME .
-  - docker tag $IMAGE_NAME $IMAGE_NAME:$TAG
-  - docker push $IMAGE_NAME
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=latest
+- export IMAGE_NAME=shwetabh3955/ezzzy_backendservices
+- docker build -t $IMAGE_NAME .
+- docker tag $IMAGE_NAME $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME
+env:
+  global:
+    secure: JLBFqJZkTOBerPlLq5WPw0YbTAgU9hhFaMI3t560eUilUvIiAIGgRJCGdTTqHIaB2Ihw0RsEQC8HS3YsLXbdsGhFdVunbGuv7XLiUZ2KqKQha720wLvJ2T/sReenlxq2jJPSNoJu9hLmwBUH5kPvXpjw+iriFWh8eyd58Sd1kfzyPI8twmu2nNGut2OUoeBYQMcp2oXw/s33ZRi18JBwnvqay5AG0K9h49dJBAGFW6dpyt218XgBM5Gk4xoSuAa00fxfgwb90hagKX/OXQX+3851wxgY2j2Zvz+YoI4ZIBVLYEZdWLhUm7Z9NOsfhiRFH2lM9w578Wv86jHl5QuWRprJI9BfO1YeR4UnWQnVkKRV9NHJ144USximBd3+cGhxntHR2oNlnb0eJA1EbxPItA3H7elX15UPmQK3qz46nnPf3+DWj6Zf5HY9so6ej0X43KAaqbF7D/VJFNTBGmSHA5rYxR93xCHO1AwIdno+ezrhOKxgTp5D9Ji/pRYq9jYDZcjpSdzD+obs3aigj0Fw/z2E8W3pIqRncbJ0uP7/6fW9ztwPIbDq1Afgvs4U/jHZ+4HInHQdEiq6TvONW7hOCBng2Ka+Ncrhoqu8Gm6B3g+n1gWE8BjBhOXJfjPZbRqMVDU0C8jZmpj1+aM7bbRgg/i4qHbt8kahyyGjzCVhEWE=
+dd:
+  secure: Fr9qzM2ouK6EAWrxWMdCXh8PcqWcU1++LyiwvHKHjLsUkqKANfuEStbgk7RSQMBKQpOSLfwue/KETTYFeer3z9aSYks17ZZd5Wt9KjHfFfG0X3C3+qfnpy4pn6rM/1vfBwbNrDvUuAwcq8RsgSOetq0BBEecPBb52XllblwCSY9FnuqqETTjM3PMwYdo6foLoJ9pQhrDa69mK5rB/DYYAHTMG0oqzjXf0/h6Q44L62of48WBUSYylmIc4Tfa3FyTAxE+vWDkYEacDCfP4g6kOZeB8ThR8A301mmpDb8WkQRsbqcuC6MLt2INvyn30mmJwS9AyvaE1+ittKNxAs2cTLZsQs0WmTP+QxOx2WjFiZC5ehOK8WKjUVkaLw9bsqHiHMGOvanOKkXXIX9XUi6r7Cq/4lpshu6UH91j0x1LRpyDuVz7N+CmBkHNxW9PShO8sD0HUl6+h4A9EYgrQOlQkVQwjNgGZsQ1QQEZE1/4zabvjYZ2yTDr1h8qHGm7BakHABHUaROKYyN6YpqQ/rH4tE5lR4NjpSBXTkvhEQgeSRXOgAG6MYOqAGhmP8ssZjAXYNMOiP5BzO2Uo9Eog6IT/rx+vLr0poMmQlfkAskgmF55Ki88oCrhHZ7Xtj7E5Sf7R2qxpZ8kiqBz6i0bGyaFtY6lNXRTwZqxldeYvgbJzE0=
