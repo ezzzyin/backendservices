@@ -10,11 +10,13 @@ VOLUME /tmp
 # Make port 8080 available to the world outside this container
 #EXPOSE 8080
 
+
+WORKDIR=target/
 # The application's jar file
-ARG JAR_FILE=target/ezzzy-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=ezzzy-0.0.1-SNAPSHOT.jar
 
 # Add the application's jar to the container
-COPY ${JAR_FILE} ezzzy-backend.jar
+COPY ./${JAR_FILE} ezzzy-backend.jar
 
 # Run the jar file 
 CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/ezzzy-backend.jar"]
