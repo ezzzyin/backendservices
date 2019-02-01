@@ -2,3 +2,21 @@ language: java
 jdk: oraclejdk8
 install: true
 script: mvn clean install -DskipTests=true
+services:
+- docker
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- export IMAGE_NAME=ezzzy-backend
+- docker build -t $IMAGE_NAME:$COMMIT .
+- docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME
+
+deploy:
+  provider:heroku
+  app: 
+    master: ezzzy-backendservices
+  api_key:
+    secure: jc8dsPKnrACvRhfNppF7pF+ywsezLwM1ZGvc3v/Qptvk1cZoo2iWnDdKv4+XG4ywOYRoMoUeqrVMqx/5otckpwRTqbkGPxC7QJy6WfewSek1aAHGEciGsSSQUo9VFVyhq/Mtm2abghqqTaNAekLZgYhx7BNBvd8cwdXDRBiILjXClGQ7gQ3okKcX4qWIjjtGa2w8/QbIm0r8sTXmdUG2i0Dq0pLUcGTQeyBrRGk+SBOTBBWo+xsRhKcbZkqjOHGI1AyoO/TH8ZLDoYxBcblMzm88mGEbSWiuL9BlDOdZOIwGLMAD54JNSt6m6r2L/WYn8fJ4pMJqEovpelTrxDdAWuLbbB/i8RpqkDO2FlpusIkfwIE193kh2aQp05uHIfzRm/ZU11zFksvHBxNstL3p+eJh9zGYv2ESkf9aNqrfauxj1/qPQzRs9BCfkTTKfXzPQjDPhMHre+Q5N4RBsBZVeOyg0/a4gDdLG9kmChj/tyEQQTF2wOtqkIvMGJ0I3lmcwfyitVi7r8Tdzk9Hda+25yw21wLeLF9lcafznhWykiO9tSulLkFNH+sXJ/YuSIPcpyMekmXtbZJ8YfVbtNUHJQpnUzt9LxP8qhgDAtAGj8YSpDdgbs9rs96t5fENfNVAVgrVWoeoibYvqTB1Cu0WRkmzw2dg6aMt0MmDPNWmbqeM=
+  
