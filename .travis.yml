@@ -7,7 +7,7 @@ services:
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - export TAG=latest
-  - export IMAGE_NAME=ezzzy-backend
+  - export IMAGE_NAME=shwetabh3955/ezzzy_backendservices
   - docker build -t $IMAGE_NAME:$COMMIT .
   - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
   - docker push $IMAGE_NAME
