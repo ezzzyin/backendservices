@@ -12,6 +12,6 @@ after_success:
 - docker tag $IMAGE_NAME $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
 deploy:
-- provider: heroku
-- api_key:$HEROKU_API_KEY
-- app: ezzzy-backendservices
+  provider: heroku
+  api_key:$HEROKU_API_KEY
+  app: ezzzy-backendservices
