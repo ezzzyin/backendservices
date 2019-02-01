@@ -1,1 +1,1 @@
-web java -Djava.security.egd\=file:/dev/./urandom -jar /ezzzy-backend.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar -Dspring.profiles.active=prod
