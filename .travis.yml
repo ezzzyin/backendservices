@@ -4,6 +4,13 @@ install: true
 script: mvn clean install -DskipTests=true
 services:
 - docker
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASS registry.heroku.com
+- export TAG=latest
+- export IMAGE_NAME=shwetabh3955/ezzzy_backendservices
+- docker build -t $IMAGE_NAME .
+- docker tag $IMAGE_NAME $IMAGE_NAME:$TAG
+- docker push $IMAGE_NAME
 
 deploy:
   provider: heroku
